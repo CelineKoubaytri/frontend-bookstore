@@ -43,12 +43,12 @@ const apiRequest = async (endpoint, options = {}) => {
 export const booksAPI = {
   getAll: async (params = {}) => {
     const queryString = new URLSearchParams(params).toString();
-    const endpoint = `/books${queryString ? `?${queryString}` : ''}`;
+    const endpoint = `/api/books${queryString ? `?${queryString}` : ''}`;
     return apiRequest(endpoint);
   },
   
   getById: async (id) => {
-    return apiRequest(`/books/${id}`);
+    return apiRequest(`/api/books/${id}`);
   },
   
   create: async (bookData) => {
@@ -59,14 +59,14 @@ export const booksAPI = {
   },
   
   update: async (id, bookData) => {
-    return apiRequest(`/books/${id}`, {
+    return apiRequest(`/api/books/${id}`, {
       method: 'PUT',
       body: JSON.stringify(bookData),
     });
   },
   
   delete: async (id) => {
-    return apiRequest(`/books/${id}`, {
+    return apiRequest(`/api/books/${id}`, {
       method: 'DELETE',
     });
   },
@@ -75,31 +75,31 @@ export const booksAPI = {
 // Cart API
 export const cartAPI = {
   get: async () => {
-    return apiRequest('/cart');
+    return apiRequest('/api/cart');
   },
   
   add: async (bookId, quantity = 1) => {
-    return apiRequest('/cart/add', {
+    return apiRequest('/api/cart/add', {
       method: 'POST',
       body: JSON.stringify({ bookId, quantity }),
     });
   },
   
   update: async (bookId, quantity) => {
-    return apiRequest('/cart/update', {
+    return apiRequest('/api/cart/update', {
       method: 'PUT',
       body: JSON.stringify({ bookId, quantity }),
     });
   },
   
   remove: async (bookId) => {
-    return apiRequest(`/cart/remove/${bookId}`, {
+    return apiRequest(`/api/cart/remove/${bookId}`, {
       method: 'DELETE',
     });
   },
   
   clear: async () => {
-    return apiRequest('/cart/clear', {
+    return apiRequest('/api/cart/clear', {
       method: 'DELETE',
     });
   },
@@ -108,15 +108,15 @@ export const cartAPI = {
 // Orders API
 export const ordersAPI = {
   getAll: async () => {
-    return apiRequest('/orders');
+    return apiRequest('/api/orders');
   },
   
   getById: async (id) => {
-    return apiRequest(`/orders/${id}`);
+    return apiRequest(`/api/orders/${id}`);
   },
   
   create: async (orderData) => {
-    return apiRequest('/orders', {
+    return apiRequest('/api/orders', {
       method: 'POST',
       body: JSON.stringify(orderData),
     });
@@ -127,5 +127,6 @@ export const ordersAPI = {
 export const healthCheck = async () => {
   return apiRequest('/health');
 };
+
 
 
